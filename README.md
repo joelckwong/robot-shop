@@ -104,20 +104,31 @@ To enable End User Monitoring (EUM) see the official [documentation](https://doc
 
 If you are running the Instana backend on premise, you will also need to set the Reporting URL to your local instance. Set the environment variable INSTANA_EUM_REPORTING_URL as above. See the Instana EUM API [reference](https://docs.instana.io/products/website_monitoring/api/#api-structure)
 
+## TL;DR
 git clone https://github.com/joelckwong/robot-shop.git
+
 kubectl create namespace robot-shop
+
 kubectl -n robot-shop create -f robot-shop/K8s/descriptors/
+
 kubectl get pods -n robot-shop
+
 You should be able to reach the robot shop app from your browser using the Kube master node's public IP: http://$kube_master_public_ip:30080
 
 Scale up the MongoDB deployment to two replicas instead of just one.
+
 Edit the deployment descriptor:
+
 kubectl edit deployment mongodb -n robot-shop
+
 You should see some YAML describing the deployment object.
 
 Under spec:, look for the line that says replicas: 1 and change it to replicas: 2.
+
 Save and exit.
+
 Check the status of the deployment with:
 
 kubectl get deployment mongodb -n robot-shop
+
 After a few moments, the number of available replicas should be 2.
